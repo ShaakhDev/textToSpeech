@@ -42,9 +42,15 @@
 			var selectedVoiceName = voiceList.selectedOptions[0].getAttribute(
 				"data-name"
 			);
+			var selectedVoiceLang = voiceList.selectedOptions[0].getAttribute(
+				"data-lang"
+			);
 			voices.forEach(voice => {
 				if (voice.name === selectedVoiceName) {
 					toSpeak.voice = voice;
+				}
+				if(voice.lang === selectedVoiceLang){
+					toSpeak.lang = voice;
 				}
 			});
 			tts.speak(toSpeak);
