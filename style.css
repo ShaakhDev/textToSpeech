@@ -1,0 +1,43 @@
+:root {
+	--color-1: #ecfbfc;
+	--color-2: #ffebd9;
+	--color-3: #ffc8bd;
+	--color-4: #235952;
+}
+body {
+	background-color: var(--color-1);
+}
+h1,
+h3,
+h4 {
+	color: var(--color-4);
+}
+h4 {
+	font-size: 1rem;
+}
+select,
+option,
+input {
+	background-color: var(--color-4) !important;
+	color: var(--color-1) !important;
+	caret-color: var(--color-1) !important;
+}
+input::selection {
+	background-color: var(--color-1) !important;
+	color: var(--color-4);
+}
+
+button {
+	background-color: var(--color-4) !important;
+	color: var(--color-1) !important;
+	display: block !important;
+	margin: 0 auto !important;
+}
+.options {
+	width: inherit !important;
+}
+@media screen and (max-width: 400px) {
+	h4 {
+		font-size: 14px;
+	}
+}

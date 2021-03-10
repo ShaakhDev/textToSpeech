@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Text to speech</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="container">
+		<h1 class="text-center mt-5">You can change any text to speech here!</h1>
+		<h3 class="mt-5">Select voices:</h3>
+		<select class="form-control" name="" id="voicelist"></select>
+		<br /><br />
+		<input class="form-control" type="text" id="txtInput" />
+		<br /><br />
+		<button class="btn btn-lg" id="btnSpeak">Speak!</button>
+		<br><br>
+		<h4>Powered by <b>BOBOLOV SHAHZOD</b></h4>
+	</div>
+
+	<script defer>
+		var voiceList = document.querySelector("#voicelist");
+		var txtInput = document.querySelector("#txtInput");
+		var btnSpeak = document.querySelector("#btnSpeak");
+
+		var tts = window.speechSynthesis;
+		var voices = [];
+
+		GetVoices();
+
+		if (speechSynthesis !== undefined) {
+			speechSynthesis.onvoiceschanged = GetVoices;
+		}
+
+		btnSpeak.addEventListener("click", () => {
+			var toSpeak = new SpeechSynthesisUtterance(txtInput.value);
+			var selectedVoiceName = voiceList.selectedOptions[0].getAttribute(
+				"data-name"
+			);
+			voices.forEach(voice => {
+				if (voice.name === selectedVoiceName) {
+					toSpeak.voice = voice;
+				}
+			});
+			tts.speak(toSpeak);
+		});
+
+		function GetVoices() {
+			voices = tts.getVoices();
+			voiceList.innerHTML = "";
+			voices.forEach(voice => {
+				var listItem = document.createElement("option");
+				listItem.textContent = voice.name;
+				listItem.setAttribute("data-lang", voice.lang);
+				listItem.setAttribute("data-name", voice.name);
+				listItem.setAttribute("class", "options");
+				voiceList.appendChild(listItem);
+			});
+			voiceList.selectedIndex = 2;
+		}
+	</script>
+</body>
+
+</html>
